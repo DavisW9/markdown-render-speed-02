@@ -1,0 +1,135 @@
+{
+  "practice": {
+    "node": "v22.23.2",
+    "rounds": 11,
+    "methodology": "fresh processes, alternating baseline/candidate order; process.resourceUsage CPU, no null subtraction",
+    "baseline": {
+      "cases": 720,
+      "repeats": 1,
+      "outputCodeUnits": 3911425,
+      "medianProcessCpuMs": 561.953,
+      "medianRenderCpuMs": 518.998,
+      "processCpuMs": [
+        567.909,
+        582.248,
+        602.506,
+        557.951,
+        577.201,
+        554.185,
+        543.995,
+        582.166,
+        549.271,
+        548.721,
+        561.953
+      ]
+    },
+    "candidate": {
+      "cases": 720,
+      "repeats": 1,
+      "outputCodeUnits": 3911425,
+      "medianProcessCpuMs": 511.008,
+      "medianRenderCpuMs": 469.672,
+      "processCpuMs": [
+        507.495,
+        503.478,
+        528.642,
+        564.732,
+        500.893,
+        518.216,
+        494.248,
+        501.374,
+        511.008,
+        605.364,
+        562.799
+      ]
+    },
+    "speedup": 1.0996951124052852
+  },
+  "unseen_willow": {
+    "node": "v22.23.2",
+    "rounds": 11,
+    "methodology": "fresh processes, alternating baseline/candidate order; process.resourceUsage CPU, no null subtraction",
+    "baseline": {
+      "cases": 720,
+      "repeats": 1,
+      "outputCodeUnits": 3678491,
+      "medianProcessCpuMs": 590.883,
+      "medianRenderCpuMs": 543.327,
+      "processCpuMs": [
+        682.492,
+        560.178,
+        610.345,
+        564.324,
+        590.883,
+        598.685,
+        558.987,
+        579.843,
+        573.561,
+        638.098,
+        657.024
+      ]
+    },
+    "candidate": {
+      "cases": 720,
+      "repeats": 1,
+      "outputCodeUnits": 3678491,
+      "medianProcessCpuMs": 541.778,
+      "medianRenderCpuMs": 500.423,
+      "processCpuMs": [
+        665.515,
+        615.544,
+        577.753,
+        546.839,
+        511.436,
+        540.78,
+        515.698,
+        508.175,
+        535.617,
+        541.778,
+        727.5
+      ]
+    },
+    "speedup": 1.0906367552761465
+  },
+  "practice_eight_passes": {
+    "node": "v22.23.2",
+    "rounds": 7,
+    "methodology": "fresh processes, alternating baseline/candidate order; process.resourceUsage CPU, no null subtraction",
+    "baseline": {
+      "cases": 720,
+      "repeats": 8,
+      "outputCodeUnits": 31291400,
+      "medianProcessCpuMs": 2673.068,
+      "medianRenderCpuMs": 2624.332,
+      "processCpuMs": [
+        2760.011,
+        2493.14,
+        2491.875,
+        2673.068,
+        2746.388,
+        2467.764,
+        2874.098
+      ]
+    },
+    "candidate": {
+      "cases": 720,
+      "repeats": 8,
+      "outputCodeUnits": 31291400,
+      "medianProcessCpuMs": 2167.957,
+      "medianRenderCpuMs": 2125.551,
+      "processCpuMs": [
+        2167.957,
+        2078.721,
+        2097.345,
+        2277.566,
+        2246.165,
+        2147.383,
+        2745.373
+      ]
+    },
+    "speedup": 1.2329893996975034
+  },
+  "unseen_seed_label": "out-of-sample-willow",
+  "seed_derivation": "SHA-256 of the UTF-8 seed label; kit generator unchanged",
+  "note": "Local Node 22.23.2 CPU; final benchmarks run sequentially without overlapping profiling jobs. Not official contest timing."
+}

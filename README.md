@@ -21,6 +21,10 @@ were written in the witnessed build session.
 - Find the final eligible run of each emphasis delimiter with native reverse
   searches, rather than walking every ordinary code unit.
 - Skip identity masking passes when their mandatory trigger characters are absent.
+- Avoid Unicode spread arrays for delimiter counts and code-point selection.
+- Skip tab expansion for strings with no tabs and fuse the list looseness check.
+- Guard list boundary checks and use a reduced GFM text rule only when all URL
+  and email triggers are absent.
 
 All other inputs continue through the upstream grammar. There is no cross-case
 cache, stored answer, input identity check, or corpus detection.
@@ -35,12 +39,31 @@ fragment/mutation cases and 1,320 edge-length/Unicode regressions pass: **28,200
 comparisons total**. Tests include malformed syntax, numeric entities, lone
 surrogates, emoji, whitespace, and delimiter lengths through 16,384.
 
-Seven fresh-process pairs, alternating baseline/candidate order, each render all
-720 practice cases once. Median process CPU from `process.resourceUsage()`:
-marked **573.179 ms**, candidate **521.935 ms**, **1.098×** speedup. Median CPU
-inside the render loop: 530.806 ms versus 481.077 ms. Startup CPU is included in
-the process figure; no null control is subtracted. These are local measurements,
-not an official score or confidence claim.
+Final serial benchmarks, alternating baseline/candidate order, each process
+renders all 720 cases. Median total process CPU from `process.resourceUsage()`:
+
+| Workload | Fresh pairs | marked | Markdown Throughput | Speedup |
+| --- | ---: | ---: | ---: | ---: |
+| Practice, one pass | 11 | 561.953 ms | 511.008 ms | 1.100× |
+| Unseen `out-of-sample-willow` seed, one pass | 11 | 590.883 ms | 541.778 ms | 1.091× |
+| Practice, eight passes per process | 7 | 2673.068 ms | 2167.957 ms | 1.233× |
+
+The extra unseen set also matches 720/720 stored generator outputs, bringing
+the total differential checks to **28,920**. Two executions of `main.ts` pass
+the official local scorer with `passed: 1, cases_passed: 720, cases_total: 720`.
+Their 4,042,837 output bytes are identical (SHA-256
+`e7e89c4fba2c45b1c4aa96c46c987e46c75a9fcdd08916b58ae7f2a7d7851724`).
+Docker was unavailable, so the documented directory overrides reproduced the
+input/output/scorer protocol in temporary local directories.
+
+Process CPU includes Node startup, module loading, input JSON parsing, and
+rendering; it excludes output serialization in this renderer benchmark. No null
+control is subtracted. Eight passes include startup and then warmed throughput,
+not eight independent cold samples. Full samples are in
+`benchmarks/results.json`. These local measurements are not an official score
+or confidence claim. CPU profiles of cold practice and independently seeded
+processes, plus repeated runs, guided the changes. See `OPTIMIZATIONS.md` for
+the grammar conditions behind each shortcut.
 
 The committed harness accepts an unpacked official kit path; it never needs an
 installed package or network access. Fixtures and generated documents stay
@@ -57,7 +80,8 @@ MAKEFUN_INPUT_DIR=/path/to/input MAKEFUN_OUTPUT_DIR=/tmp/markdown-output node ma
 
 # Differential tests and alternating fresh-process CPU benchmark:
 node test/differential.mjs /path/to/markdown-render-speed-02-kit
-node test/benchmark.mjs /path/to/markdown-render-speed-02-kit 9
+node test/benchmark.mjs /path/to/markdown-render-speed-02-kit 11
+node test/protocol.mjs /path/to/markdown-render-speed-02-kit
 
 # Optional repeated runs per fresh process (warm throughput after startup):
 node test/benchmark.mjs /path/to/markdown-render-speed-02-kit 9 8
