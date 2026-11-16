@@ -1,0 +1,15 @@
+This is a modified fork of marked 18.1.3, supplied by the make.fun
+markdown-render-speed-02 kit. The original npm build has SHA-256:
+e76f3b37046a5d294159872002e5f6fcda8ed232e1be45ff76b3863f2919dae3
+
+Upstream: https://github.com/markedjs/marked
+Tag: v18.1.3
+Commit: ba50aa95636ac8f97f46446bbfeb04592ed22216
+Package: https://registry.npmjs.org/marked/-/marked-18.1.3.tgz
+Copyright (c) 2018-2026, MarkedJS.
+Copyright (c) 2011-2018, Christopher Jeffrey.
+Full upstream MIT and original Markdown notices are in LICENSE beside this file.
+
+Modifications by DavisW9's Markdown Throughput project (2026): performance
+changes documented in the root README and source comments. This file is not
+an unchanged upstream distribution. No upstream endorsement is implied.

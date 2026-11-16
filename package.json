@@ -1,0 +1,12 @@
+{
+  "name": "markdown-throughput",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Exact marked 18.1.3 HTML with less parsing overhead",
+  "scripts": {
+    "test": "node test/differential.mjs",
+    "bench": "node test/benchmark.mjs"
+  },
+  "license": "MIT"
+}
