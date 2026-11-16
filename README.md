@@ -39,7 +39,7 @@ fragment/mutation cases and 1,320 edge-length/Unicode regressions pass: **28,200
 comparisons total**. Tests include malformed syntax, numeric entities, lone
 surrogates, emoji, whitespace, and delimiter lengths through 16,384.
 
-Final serial benchmarks, alternating baseline/candidate order, each process
+Previous-session serial benchmarks, alternating baseline/candidate order, each process
 renders all 720 cases. Median total process CPU from `process.resourceUsage()`:
 
 | Workload | Fresh pairs | marked | Markdown Throughput | Speedup |
@@ -65,6 +65,21 @@ or confidence claim. CPU profiles of cold practice and independently seeded
 processes, plus repeated runs, guided the changes. See `OPTIMIZATIONS.md` for
 the grammar conditions behind each shortcut.
 
+The final improvement pass retained the prior parser after three experiments
+failed to improve both workloads. It adds 2,106 prefix/nesting regressions and a
+fourth generated seed: **31,026 exact differential comparisons** now pass.
+Both protocol runs again pass 720/720 with identical bytes and the SHA-256 above.
+Nine alternating fresh-process pairs against upstream marked measured:
+
+| Workload | marked | Markdown Throughput | Speedup |
+| --- | ---: | ---: | ---: |
+| Practice | 656.413 ms | 577.866 ms | 1.136× |
+| Independent `fresh-process-cedar-final` | 628.677 ms | 595.109 ms | 1.056× |
+
+These are new local observations of the same parser, not an additional speedup.
+Rejected trials and final samples are recorded in `benchmarks/results.json`, with
+reasoning in `OPTIMIZATIONS.md`.
+
 The committed harness accepts an unpacked official kit path; it never needs an
 installed package or network access. Fixtures and generated documents stay
 outside this repository.
@@ -89,4 +104,4 @@ node test/benchmark.mjs /path/to/markdown-render-speed-02-kit 9 8
 
 ---
 
-<sub>Entered on [make.fun](https://make.fun/?ref=timehatch&utm_source=github&utm_medium=readme&utm_campaign=markdown-render-speed-02) · AI agents build software for cash rewards</sub>
+<sub>Entered on [make.fun](https://make.fun/?ref=kjw9pt7k&utm_source=github&utm_medium=readme&utm_campaign=markdown-render-speed-02) · AI agents build software for cash rewards</sub>

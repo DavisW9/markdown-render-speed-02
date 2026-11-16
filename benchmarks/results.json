@@ -131,5 +131,357 @@
   },
   "unseen_seed_label": "out-of-sample-willow",
   "seed_derivation": "SHA-256 of the UTF-8 seed label; kit generator unchanged",
-  "note": "Local Node 22.23.2 CPU; final benchmarks run sequentially without overlapping profiling jobs. Not official contest timing."
+  "note": "Local Node 22.23.2 CPU; final benchmarks run sequentially without overlapping profiling jobs. Not official contest timing.",
+  "final_pass": {
+    "prior_commit": "c38bcb535fb66ce05eceea9511744e763b5adf95",
+    "seed_label": "fresh-process-cedar-final",
+    "seed_derivation": "SHA-256 of UTF-8 label, unchanged kit generator",
+    "decision": "All three experiments rejected; parser restored byte-for-byte to prior commit. Each experiment ran nine alternating fresh-process pairs per workload. Timings are noisy local measurements.",
+    "experiments": {
+      "individual_block_guards": {
+        "practice": {
+          "node": "v22.23.2",
+          "rounds": 9,
+          "methodology": "fresh processes, alternating baseline/candidate order; process.resourceUsage CPU, no null subtraction",
+          "baseline": {
+            "cases": 720,
+            "repeats": 1,
+            "outputCodeUnits": 3911425,
+            "medianProcessCpuMs": 618.336,
+            "medianRenderCpuMs": 567.725,
+            "processCpuMs": [
+              897.037,
+              574.926,
+              606.267,
+              618.336,
+              687.194,
+              659.752,
+              775.149,
+              533.821,
+              583.711
+            ]
+          },
+          "candidate": {
+            "cases": 720,
+            "repeats": 1,
+            "outputCodeUnits": 3911425,
+            "medianProcessCpuMs": 643.23,
+            "medianRenderCpuMs": 592.585,
+            "processCpuMs": [
+              696.249,
+              663.069,
+              556.027,
+              601.366,
+              608.342,
+              585.276,
+              909.362,
+              643.23,
+              688.164
+            ]
+          },
+          "speedup": 0.9612984469007976
+        },
+        "cedar": {
+          "node": "v22.23.2",
+          "rounds": 9,
+          "methodology": "fresh processes, alternating baseline/candidate order; process.resourceUsage CPU, no null subtraction",
+          "baseline": {
+            "cases": 720,
+            "repeats": 1,
+            "outputCodeUnits": 4072448,
+            "medianProcessCpuMs": 621.897,
+            "medianRenderCpuMs": 571.954,
+            "processCpuMs": [
+              760.35,
+              640.225,
+              621.897,
+              592.017,
+              585.837,
+              628.039,
+              638.959,
+              598.074,
+              582.197
+            ]
+          },
+          "candidate": {
+            "cases": 720,
+            "repeats": 1,
+            "outputCodeUnits": 4072448,
+            "medianProcessCpuMs": 585.973,
+            "medianRenderCpuMs": 536.521,
+            "processCpuMs": [
+              657.515,
+              576.339,
+              578.451,
+              627.197,
+              750.36,
+              698.383,
+              585.973,
+              568.662,
+              563.481
+            ]
+          },
+          "speedup": 1.0613065789720688
+        }
+      },
+      "list_first_line": {
+        "practice": {
+          "node": "v22.23.2",
+          "rounds": 9,
+          "methodology": "fresh processes, alternating baseline/candidate order; process.resourceUsage CPU, no null subtraction",
+          "baseline": {
+            "cases": 720,
+            "repeats": 1,
+            "outputCodeUnits": 3911425,
+            "medianProcessCpuMs": 553.985,
+            "medianRenderCpuMs": 508.489,
+            "processCpuMs": [
+              567.934,
+              562.445,
+              553.985,
+              547.363,
+              551.277,
+              547.8,
+              565.976,
+              601.747,
+              531.82
+            ]
+          },
+          "candidate": {
+            "cases": 720,
+            "repeats": 1,
+            "outputCodeUnits": 3911425,
+            "medianProcessCpuMs": 562.08,
+            "medianRenderCpuMs": 513.7,
+            "processCpuMs": [
+              549.418,
+              621.232,
+              562.08,
+              530.895,
+              530.493,
+              539.588,
+              562.701,
+              580.243,
+              658.739
+            ]
+          },
+          "speedup": 0.9855981354967264
+        },
+        "cedar": {
+          "node": "v22.23.2",
+          "rounds": 9,
+          "methodology": "fresh processes, alternating baseline/candidate order; process.resourceUsage CPU, no null subtraction",
+          "baseline": {
+            "cases": 720,
+            "repeats": 1,
+            "outputCodeUnits": 4072448,
+            "medianProcessCpuMs": 600.104,
+            "medianRenderCpuMs": 549.582,
+            "processCpuMs": [
+              625.741,
+              569.511,
+              587.048,
+              577.648,
+              589.475,
+              607.869,
+              600.104,
+              670.047,
+              848.247
+            ]
+          },
+          "candidate": {
+            "cases": 720,
+            "repeats": 1,
+            "outputCodeUnits": 4072448,
+            "medianProcessCpuMs": 611.072,
+            "medianRenderCpuMs": 554.121,
+            "processCpuMs": [
+              655.877,
+              581.306,
+              668.446,
+              611.072,
+              631.362,
+              583.116,
+              590.978,
+              596.961,
+              844.916
+            ]
+          },
+          "speedup": 0.9820512149141182
+        }
+      },
+      "grouped_block_guard": {
+        "practice": {
+          "node": "v22.23.2",
+          "rounds": 9,
+          "methodology": "fresh processes, alternating baseline/candidate order; process.resourceUsage CPU, no null subtraction",
+          "baseline": {
+            "cases": 720,
+            "repeats": 1,
+            "outputCodeUnits": 3911425,
+            "medianProcessCpuMs": 578.805,
+            "medianRenderCpuMs": 532.741,
+            "processCpuMs": [
+              601.625,
+              572.384,
+              571.523,
+              578.805,
+              556.912,
+              565.057,
+              595.025,
+              602.126,
+              581.441
+            ]
+          },
+          "candidate": {
+            "cases": 720,
+            "repeats": 1,
+            "outputCodeUnits": 3911425,
+            "medianProcessCpuMs": 592.971,
+            "medianRenderCpuMs": 541.886,
+            "processCpuMs": [
+              617.354,
+              593.922,
+              592.971,
+              560.343,
+              559.466,
+              563.683,
+              578.61,
+              643.325,
+              651.828
+            ]
+          },
+          "speedup": 0.976110130175
+        },
+        "cedar": {
+          "node": "v22.23.2",
+          "rounds": 9,
+          "methodology": "fresh processes, alternating baseline/candidate order; process.resourceUsage CPU, no null subtraction",
+          "baseline": {
+            "cases": 720,
+            "repeats": 1,
+            "outputCodeUnits": 4072448,
+            "medianProcessCpuMs": 616.193,
+            "medianRenderCpuMs": 569.645,
+            "processCpuMs": [
+              627.409,
+              614.014,
+              616.193,
+              620.153,
+              629.521,
+              619.432,
+              614.027,
+              605.486,
+              593.758
+            ]
+          },
+          "candidate": {
+            "cases": 720,
+            "repeats": 1,
+            "outputCodeUnits": 4072448,
+            "medianProcessCpuMs": 625.661,
+            "medianRenderCpuMs": 574.882,
+            "processCpuMs": [
+              641.58,
+              647.565,
+              599.179,
+              684.397,
+              641.579,
+              615.147,
+              602.201,
+              614.802,
+              625.661
+            ]
+          },
+          "speedup": 0.9848672044445794
+        }
+      }
+    },
+    "final_vs_marked": {
+      "practice": {
+        "node": "v22.23.2",
+        "rounds": 9,
+        "methodology": "fresh processes, alternating baseline/candidate order; process.resourceUsage CPU, no null subtraction",
+        "baseline": {
+          "cases": 720,
+          "repeats": 1,
+          "outputCodeUnits": 3911425,
+          "medianProcessCpuMs": 656.413,
+          "medianRenderCpuMs": 609.422,
+          "processCpuMs": [
+            720.214,
+            657.751,
+            630.287,
+            702.696,
+            688.2,
+            656.413,
+            628.152,
+            624.244,
+            611.531
+          ]
+        },
+        "candidate": {
+          "cases": 720,
+          "repeats": 1,
+          "outputCodeUnits": 3911425,
+          "medianProcessCpuMs": 577.866,
+          "medianRenderCpuMs": 530.854,
+          "processCpuMs": [
+            577.866,
+            576.904,
+            565.531,
+            577.743,
+            615.411,
+            555.479,
+            593.33,
+            586.789,
+            584.73
+          ]
+        },
+        "speedup": 1.1359259759182925
+      },
+      "cedar": {
+        "node": "v22.23.2",
+        "rounds": 9,
+        "methodology": "fresh processes, alternating baseline/candidate order; process.resourceUsage CPU, no null subtraction",
+        "baseline": {
+          "cases": 720,
+          "repeats": 1,
+          "outputCodeUnits": 4072448,
+          "medianProcessCpuMs": 628.677,
+          "medianRenderCpuMs": 580.521,
+          "processCpuMs": [
+            639.376,
+            642.131,
+            619.811,
+            628.677,
+            622.383,
+            649.363,
+            628.831,
+            596.922,
+            597.902
+          ]
+        },
+        "candidate": {
+          "cases": 720,
+          "repeats": 1,
+          "outputCodeUnits": 4072448,
+          "medianProcessCpuMs": 595.109,
+          "medianRenderCpuMs": 547.134,
+          "processCpuMs": [
+            596.044,
+            595.109,
+            592.266,
+            655.896,
+            599.904,
+            594.175,
+            604.544,
+            576.601,
+            584.482
+          ]
+        },
+        "speedup": 1.0564064734359588
+      }
+    }
+  }
 }

@@ -6,7 +6,7 @@ const rounds = Number(process.argv[3] ?? 9);
 const repeats = Number(process.argv[4] ?? 1);
 const cases = process.argv[5] ? resolve(process.argv[5]) : join(kit, 'practice/input/cases.json');
 const worker = fileURLToPath(new URL('./benchmark-worker.mjs', import.meta.url));
-const modules = { baseline: join(kit, 'baselines/parse.js'), candidate: fileURLToPath(new URL('../parse.js', import.meta.url)) };
+const modules = { baseline: process.argv[6] ? resolve(process.argv[6]) : join(kit, 'baselines/parse.js'), candidate: fileURLToPath(new URL('../parse.js', import.meta.url)) };
 const records = { baseline: [], candidate: [] };
 for (let round = 0; round < rounds; round++) {
   for (const name of round % 2 ? ['candidate', 'baseline'] : ['baseline', 'candidate']) {

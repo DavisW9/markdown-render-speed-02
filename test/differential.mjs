@@ -27,10 +27,10 @@ for (let i = 0; i < practice.length; i++) {
 }
 console.log(`practice: ${practice.length}/${practice.length}`);
 
-// Three unrelated deterministic instance seeds, derived from public test labels.
+// Unrelated deterministic instance seeds, derived from public test labels.
 const temporary = mkdtempSync(join(tmpdir(), 'markdown-throughput-test-'));
 try {
-  for (const label of ['independent-alder', 'independent-quartz', 'independent-tundra']) {
+  for (const label of ['independent-alder', 'independent-quartz', 'independent-tundra', 'fresh-process-cedar-final']) {
     const input = join(temporary, label, 'input');
     const output = join(temporary, label, 'output');
     mkdirSync(input, { recursive: true });
@@ -40,7 +40,12 @@ try {
     });
     if (result.status !== 0) throw Error(result.stderr);
     const cases = JSON.parse(readFileSync(join(output, 'input/cases.json'), 'utf8'));
-    for (const c of cases) check(c.markdown, `${label}/${c.id}`);
+    const expected = JSON.parse(readFileSync(join(output, 'reference/expected.json'), 'utf8'));
+    for (let i = 0; i < cases.length; i++) {
+      const c = cases[i];
+      check(c.markdown, `${label}/${c.id}`);
+      if (parse(c.markdown) !== expected.cases[i].html) throw Error('generated reference mismatch');
+    }
     console.log(`${label}: ${cases.length}/${cases.length}`);
   }
 } finally { rmSync(temporary, { recursive: true, force: true }); }
@@ -73,4 +78,15 @@ for (const length of [0, 1, 2, 3, 4, 7, 15, 31, 32, 63, 64, 127, 128, 255, 256, 
     }
   }
 }
-console.log(`fuzz: 24000; edge regressions: ${edges}; total: ${checked}; all exact`);
+// Block/list regressions: exercise syntax starters, indentation limits,
+// whitespace variants, and nesting contexts, including impossible near-matches.
+let prefixes = 0;
+for (const indent of ['', ' ', '  ', '   ', '    ', '     ', '\t', ' \t', '  \t', '   \t', '\u00a0', '\u000b', '\u000c']) {
+  for (const body of ['plain', '0. item', '1) item', '999999999. x', '1000000000. x', '+ x', '- x', '* x', '_ _ _', '---', '***', '~~~', '```', '# x', '####### x', '> x', '<div>', '<!--x-->', '<?x?>', '<![CDATA[x]]>', '<!A>', '<x>', '[r]: /x', '[r', '', ' ', '\t']) {
+    const line = indent + body;
+    for (const markdown of [line, line + '\nnext\n', 'before\n' + line + '\n', '> ' + line + '\n', '- item\n  ' + line + '\n', line + '\n---\n']) {
+      check(markdown, `block-prefix/${prefixes++}`);
+    }
+  }
+}
+console.log(`fuzz: 24000; edge regressions: ${edges}; block prefixes: ${prefixes}; total: ${checked}; all exact`);
